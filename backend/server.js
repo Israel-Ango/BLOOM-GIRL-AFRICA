@@ -13,11 +13,18 @@ const app = express();
 
 const allowedOrigins = [
     'http://localhost:3000',
-    process.env.FRONTEND_URL  // ← your deployed frontend on Render
+    process.env.FRONTEND_URL   // Your deployed frontend URL on Render
 ];
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+        // Allow requests with no origin (e.g., mobile apps, curl)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`CORS blocked for origin: ${origin}`));
+        }
+    },
     credentials: true
 }));
 
@@ -27,19 +34,21 @@ app.use(express.json());
 // DATABASE CONNECTION
 // ---------------------
 
-const MONGODB_URI = process.env.MONGODB_URI;
+// Use Cloud DB if available, otherwise fallback to local DB for development
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGO_URI_LOCAL;
 
-if (!MONGODB_URI) {
-    console.error('❌ ERROR: MONGODB_URI is missing in environment variables.');
+if (!MONGO_URI) {
+    console.error('❌ ERROR: No MongoDB URI found in environment variables.');
     process.exit(1);
 }
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(MONGODB_URI);
-        console.log('✅ Connected to MongoDB (Atlas / Render)');
+        await mongoose.connect(MONGO_URI);
+        console.log('✅ Connected to MongoDB!');
     } catch (error) {
-        console.error('❌ MongoDB connection error:', error);
+        console.error('❌ MongoDB connection error:', error.message);
+        console.error(error);
         process.exit(1);
     }
 };
@@ -72,13 +81,13 @@ const contactSchema = new mongoose.Schema({
     status: { type: String, default: 'new' }
 });
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
     next();
 });
 
-userSchema.methods.correctPassword = async function(candidatePassword) {
+userSchema.methods.correctPassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
 
@@ -93,7 +102,7 @@ app.get('/api/health', (req, res) => {
     res.json({ success: true, message: 'Server is running 🚀' });
 });
 
-// CONTACT FORM ROUTE
+// CONTACT FORM
 app.post('/api/contact', async (req, res) => {
     try {
         const newMessage = await Contact.create(req.body);
@@ -103,11 +112,12 @@ app.post('/api/contact', async (req, res) => {
             data: newMessage
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ success: false, message: 'Error saving message' });
     }
 });
 
-// SIGNUP ROUTE
+// SIGNUP
 app.post('/api/auth/signup', async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -126,11 +136,12 @@ app.post('/api/auth/signup', async (req, res) => {
         });
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ success: false, message: 'Signup error' });
     }
 });
 
-// LOGIN ROUTE
+// LOGIN
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -150,6 +161,7 @@ app.post('/api/auth/login', async (req, res) => {
         res.json({ success: true, token, user });
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ success: false, message: 'Login error' });
     }
 });
