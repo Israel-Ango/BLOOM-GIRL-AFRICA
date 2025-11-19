@@ -301,7 +301,7 @@ const Signup = () => {
                 <div style={styles.navContainer}>
                     <div style={styles.logoContainer}>
                         <img 
-                            src="/images/logo.png" 
+                            src="/images/Logo.jpg" 
                             alt="Bloom Girl Africa" 
                             style={styles.logoImage}
                         />

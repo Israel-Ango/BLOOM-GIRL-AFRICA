@@ -171,19 +171,19 @@ const About = () => {
 
     const teamMembers = [
         {
-            name: "Dr. Amina Bello",
-            role: "Founder & Executive Director",
-            description: "Education advocate with 15+ years experience in African educational development and women empowerment.",
+            name: "Hauwa Usman Garba",
+            role: "Executive Director",
+            description: "Education advocate with 8+ years experience in humaniterian development and women empowerment.",
             icon: "👑"
         },
         {
-            name: "Ngozi Okoro",
+            name: "Patience Ango",
             role: "Curriculum Director",
-            description: "Expert in SDG education and African-centered learning methodologies across 20+ African nations.",
+            description: "Expert in self development and experirnced mentor around africa.",
             icon: "📖"
         },
         {
-            name: "Sarah Mensah",
+            name: "Aex Ogar",
             role: "Partnership Lead",
             description: "Building strategic alliances with African organizations and international development partners.",
             icon: "🤝"
@@ -197,7 +197,7 @@ const About = () => {
                 <div style={styles.navContainer}>
                     <div style={styles.logoContainer}>
                         <img 
-                            src="/images/logo.png" 
+                            src="/images/Logo.jpg" 
                             alt="Bloom Girl Africa" 
                             style={styles.logoImage}
                         />
