@@ -7,7 +7,7 @@ const LandingPage = () => {
             id: 1,
             name: "ISRAEL ANGO",
             title: "Founder",
-            image: "/images/founder 2.jpg",
+            image: "/images/founder 1.jpg",
             bio: "Visionary leader and a software developer with experience in humaniterian sector. Passionate about empowering young African women through innovative learning solutions that combine traditional wisdom with modern knowledge.",
             achievement: "GirlChild advocate and sustainable development"
         },
@@ -15,7 +15,7 @@ const LandingPage = () => {
             id: 2,
             name: "JENNIFER OMOREGIE", 
             title: "Co-Founder",
-            image: "/images/co-founder 2.jpg",
+            image: "/images/jenny.jpg",
             bio: "A seasoned analyst and software develper with a strong commitment to gender equality and youth empowerment. Brings expertise in curriculum development and African educational systems.",
             achievement: "Expert in analysis and mentoring"
         }
