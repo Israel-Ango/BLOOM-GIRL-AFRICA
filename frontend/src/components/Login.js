@@ -80,9 +80,9 @@ const Login = () => {
             gap: '15px'
         },
         logoImage: {
-            height: '40px',
-            width: '40px',
-            borderRadius: '8px'
+            height: '60px',
+            width: '60px',
+            borderRadius: '9px'
         },
         logoText: {
             fontSize: '20px',

@@ -65,9 +65,9 @@ const LandingPage = () => {
             gap: '15px'
         },
         logoImage: {
-            width: '50px',
-            height: '50px',
-            borderRadius: '10px'
+            width: '100px',
+            height: '100px',
+            borderRadius: '20px'
         },
         logoText: {
             fontSize: '1.5rem',

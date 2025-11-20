@@ -30,9 +30,9 @@ const Courses = () => {
             gap: '15px'
         },
         logoImage: {
-            width: '50px',
-            height: '50px',
-            borderRadius: '10px'
+            width: '70px',
+            height: '70px',
+            borderRadius: '11px'
         },
         logoText: {
             fontSize: '1.5rem',
