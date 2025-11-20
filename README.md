@@ -269,8 +269,11 @@ The application will automatically create necessary collections. Sample SDG data
 The system uses Nodemailer for certificate delivery. Configure in backend .env:
 
 env
+
 EMAIL_SERVICE=gmail
+
 EMAIL_USER=your_email@gmail.com
+
 EMAIL_PASS=your_app_password
 
 ## 🎯 Target Audience
